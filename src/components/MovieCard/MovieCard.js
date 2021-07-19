@@ -6,8 +6,7 @@ import * as S from './styles'
 export default function MovieCard({ post, title, year, plot, directors, genre }) {
   return (
     <S.ContainerCard >
-      
-      <S.ContainerPoster  alt="Cartaz do filme" src={ post } />
+      <S.ContainerImgPoster  alt="Cartaz do filme" src={ post } />
       <S.ContainerInfos>
         <h2>{ title } </h2>
         

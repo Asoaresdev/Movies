@@ -5,13 +5,13 @@ export const Container = styled.div`
     max-width: 100vw;
     padding: 1rem;
     background: #F7F7F7;
-    
+    border: 1px solid;
 
 `
 export const ContainerHome = styled.div`
     display: grid;
     grid-template-columns: 30vw 30vw 30vw;
-    gap: 1rem;
+    gap: 0.75rem;
     max-width: 100vw;
     justify-content: center;
 
@@ -30,6 +30,11 @@ export const ConatinerSearch = styled.div`
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
+
+    @media screen and (max-width: 960px) {
+        width: 50vw;
+
+  }
 `
 export const Select = styled.div`
     padding: 2rem;
@@ -55,15 +60,6 @@ export const Choosed = styled.div`
         button{
             border: none;
             cursor: pointer;
-
-            ${({ isActive }) =>
-            isActive &&
-            css`
-             {
-                background: green;
-            }
-            `}
-
         }
         li{
             list-style: none;

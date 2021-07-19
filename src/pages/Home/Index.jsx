@@ -56,7 +56,7 @@ export default function Index() {
     }
 
 
-    const cardMoviesFiltered = listFilteredToShow.map((movie) => {
+    const cardMovie = listFilteredToShow.map((movie) => {
         return(
             <MovieCard 
             key={movie._id}
@@ -108,7 +108,7 @@ export default function Index() {
             <S.PageIndicator>Page: {page}</S.PageIndicator>
 
             <S.ContainerHome>
-                {cardMoviesFiltered}
+                {cardMovie}
             </S.ContainerHome>
 
             <S.ContainerButtons>
