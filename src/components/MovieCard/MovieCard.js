@@ -3,14 +3,15 @@ import React from 'react'
 import * as S from './styles'
 
 
-export default function MovieCard({ post, title, plot, directors, genre }) {
+export default function MovieCard({ post, title, year, plot, directors, genre }) {
   return (
     <S.ContainerCard >
       
       <S.ContainerPoster  alt="Cartaz do filme" src={ post } />
       <S.ContainerInfos>
         <h2>{ title } </h2>
-        <p>{ plot }</p>
+        
+        <p>{ plot } <br /><b>Year</b>: { year }</p>
         <p>Director:</p>
         
         {directors && directors.map((item) => (<S.Director key={ item }>{ item }</S.Director>))}

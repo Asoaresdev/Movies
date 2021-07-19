@@ -37,7 +37,7 @@ export default function Index() {
         if(genres.length >1){
             alert("Escolha somente dois gêneros")
         }else{
-            setGenres([... genres, event.target.value])
+            setGenres([...genres, event.target.value])
             event.target.value=''
         }
     }
@@ -62,6 +62,7 @@ export default function Index() {
             key={movie._id}
             post={movie.poster}
             title={movie.title}
+            year={movie.year}
             plot={movie.plot}
             directors={movie.directors}
             genre = {movie.genres}
@@ -78,7 +79,6 @@ export default function Index() {
     
     return (
         <S.Container>
-            
            <S.ConatinerSearch id='top'>
                <S.Select>
                     <select name="" id="" onChange={chooseGenres}>
@@ -123,7 +123,6 @@ export default function Index() {
                 </ul>
                 <button> <a href="#top">Top</a> </button>
             </S.ContainerButtons>
-
         </S.Container>
     )
 }

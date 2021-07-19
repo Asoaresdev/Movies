@@ -78,14 +78,6 @@ export const Button = styled.button`
         border: none;
         cursor: pointer;
 
-        ${({ isActive }) =>
-        isActive &&
-        css`
-            {
-            background: green;
-            }
-        `}
-
 `
 
 export const ContainerButtons = styled.div`

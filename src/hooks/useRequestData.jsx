@@ -30,6 +30,6 @@ export const useRequestDataSetState = (initialData, url, setStateFunc) => {
             .catch((error) =>{
                 alert(`Algo deu errado, tente novamente. Erro:${error}`)
             } )
-        }, [url])
+        }, [url, setStateFunc ])
         return data
 }
