@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 
 export const Container = styled.div`
@@ -55,6 +55,15 @@ export const Choosed = styled.div`
         button{
             border: none;
             cursor: pointer;
+
+            ${({ isActive }) =>
+            isActive &&
+            css`
+             {
+                background: green;
+            }
+            `}
+
         }
         li{
             list-style: none;
@@ -63,4 +72,36 @@ export const Choosed = styled.div`
             padding: 0.5rem;
         }
     }
+`
+
+export const Button = styled.button`
+        border: none;
+        cursor: pointer;
+
+        ${({ isActive }) =>
+        isActive &&
+        css`
+            {
+            background: green;
+            }
+        `}
+
+`
+
+export const ContainerButtons = styled.div`
+    button{
+        margin-right: 1rem;
+        padding: 0.5rem 1rem;
+        li{
+            list-style: none;
+        }
+    }
+    a{
+        text-decoration: none;
+    }
+`
+
+export const PageIndicator = styled.h4`
+    text-align: start;
+    font-weight: 400;
 `

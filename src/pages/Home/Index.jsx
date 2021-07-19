@@ -1,7 +1,7 @@
 import React from 'react'
 
 import MovieCard from '../../components/MovieCard/MovieCard'
-import { BASE_URL, BASE_URL_Genres, BASE_URL_Filter } from '../../constants/urls'
+import { BASE_URL_Genres, BASE_URL_Filter } from '../../constants/urls'
 import { useRequestData, useRequestDataSetState } from '../../hooks/useRequestData'
 
 import * as S from './styles'
@@ -19,30 +19,29 @@ export default function Index() {
 
     const [genres, setGenres] = React.useState([])
     const [page, setPage] = React.useState(1)
-    // const [filtered, setfiltered] = React.useState()
     const [listFilteredToShow , setListFilteredToShow] = React.useState([])
 
 
-
-    const listMovies = useRequestData([], `${BASE_URL}?page=${page}`)
     const listGenres = useRequestData([], BASE_URL_Genres)
     const listFiltered = useRequestDataSetState([],`${ BASE_URL_Filter}${ genres.map((filtered) => {
         return (filtered)
     })}&page=${page}`, setListFilteredToShow)
 
 
-
     function changePagination (pagination){
         setPage(pagination)
     }
 
-    // function clear(){
-    //     setGenres([])
-    // }
 
-    // function filter() {
-    //     setListFilteredToShow(listFiltered)
-    // }
+    const chooseGenres=(event)=>{
+        if(genres.length >1){
+            alert("Escolha somente dois gêneros")
+        }else{
+            setGenres([... genres, event.target.value])
+            event.target.value=''
+        }
+    }
+
 
     function RemoveGenre(genreToRemove){
         if (genreToRemove) {
@@ -55,31 +54,12 @@ export default function Index() {
             console.log(`AFTER: ${neWGenres}`)
         }
     }
-  
 
-    console.log(listFilteredToShow);
-         
-
-    const cardMovies = listMovies.map((movie) => {
-        return(
-            <MovieCard 
-            key={movie._id}
-            id= {movie._id}
-            post={movie.poster}
-            title={movie.title}
-            plot={movie.plot}
-            directors={movie.directors}
-            genre = {movie.genres}
-            />
-        )
-    }) 
-   
 
     const cardMoviesFiltered = listFilteredToShow.map((movie) => {
         return(
             <MovieCard 
             key={movie._id}
-            id= {movie._id}
             post={movie.poster}
             title={movie.title}
             plot={movie.plot}
@@ -95,52 +75,55 @@ export default function Index() {
         )
     })
 
-    const chooseGenres=(event)=>{
-        if(genres.length >1){
-            alert("Escolha somente dois gêneros")
-        }else{
-            setGenres([... genres, event.target.value])
-            event.target.value=''
-        }
-    }
+    
     return (
         <S.Container>
-           <S.ConatinerSearch>
+            
+           <S.ConatinerSearch id='top'>
                <S.Select>
                     <select name="" id="" onChange={chooseGenres}>
                         <option value={""}>All Genres</option>
-                        {genresOptions}
+                        { genresOptions }
                     </select>
                 </S.Select>
-                    {genres.length > 0 &&
+
+                {genres.length > 0 &&
                 <S.Choosed>
                     <h2>Generos escolhidos</h2>
                     <ul>
                     {genres.map((item) => {
                         return(
-                            <button onClick={() => RemoveGenre(item)}><li key={item}>{item}</li>X</button>
+                            <button key={item} onClick={() => RemoveGenre(item)}>
+                                <li>{ item }</li>
+                                X
+                            </button>
                         )
                     })}
                     </ul>
                 </S.Choosed> 
                 }
-            </S.ConatinerSearch>
-            <S.ContainerHome>
-                {listFilteredToShow.length > 0 ? cardMoviesFiltered  : cardMovies }
 
+            </S.ConatinerSearch>
+
+            <S.PageIndicator>Page: {page}</S.PageIndicator>
+
+            <S.ContainerHome>
+                {cardMoviesFiltered}
             </S.ContainerHome>
-            <div>
+
+            <S.ContainerButtons>
                 <ul>                
-                    {pagination.map((page) => {
+                {pagination.map((page) => {
                     return (
-                    <button type="button" onClick={() => changePagination(page.number)} >
-                        <li key={page.number}>{page.number}</li>
-                    </button>
+                        <S.Button type="button" onClick={() => changePagination(page.number)} >
+                            <li key={page.number}>{page.number}</li>
+                        </S.Button>
                     )
                 })}
                 </ul>
+                <button> <a href="#top">Top</a> </button>
+            </S.ContainerButtons>
 
-            </div>
         </S.Container>
     )
 }
